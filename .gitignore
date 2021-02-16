@@ -1,4 +1,10 @@
 # Logs
+
+/functions/service-account.json
+*service-account.json
+
+**/.DS_Store
+
 logs
 *.log
 npm-debug.log*
