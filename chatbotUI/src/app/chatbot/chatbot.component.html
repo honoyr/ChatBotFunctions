@@ -1,0 +1,22 @@
+<nb-chat title="Conversation with a bot">
+<nb-chat-message *ngFor="let msg of messages"
+                 type = "text"
+                 [message]="msg.text"
+                 [reply]="msg.reply"
+                 [sender]="msg.sender"
+                 [date]="msg.date"
+                 [avatar]="msg.avatar"
+>
+
+</nb-chat-message>
+  <nb-chat-message *ngIf="loading" [nbSpinner]="loading" nbSpinnerStatus="info"
+                   type="text"
+                   avatar="/assets/bot.jpeg"
+                   message="...">
+
+  </nb-chat-message>
+
+  <nb-chat-form (send)="handleUserMessage($event)" [dropFiles]="true">
+  </nb-chat-form>
+
+</nb-chat>

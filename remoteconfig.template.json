@@ -1,5 +1,14 @@
 {
-  "remoteconfig": {
-    "template": "remoteconfig.template.json"
-  }
+  "versions": [
+    {
+      "version_number": "1",
+      "update_time": "2021-03-10T02:38:54Z",
+      "update_user": {
+        "email": "dgonor42@gmail.com"
+      },
+      "description": "One small change on the console",
+      "origin": "CONSOLE",
+      "update_type": "INCREMENTAL_UPDATE"
+    }
+  ]
 }

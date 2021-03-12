@@ -1,7 +1,13 @@
 # Logs
 
-/functions/service-account.json
+/functions/src/credentials/**
+/functions/src/config/**
+
+# build functions to es15
+/functions/dist/**
+
 *service-account.json
+
 
 **/.DS_Store
 

@@ -3,31 +3,45 @@
   "description": "Cloud Functions for Firebase",
   "scripts": {
     "lint": "eslint .",
-    "serve": "firebase emulators:start --only functions",
+    "serve": "npm run-script watch & firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "dev": "nodemon — exec babel-node dist/index.js",
+    "watch": "npm run-script build --watch",
+    "build": "babel 'src' --out-dir 'dist' --source-maps",
+    "local": "npm run-script watch & firebase serveploy"
   },
   "engines": {
-    "node": "12"
+    "node": "14"
   },
-  "main": "index.js",
+  "main": "dist/index.js",
   "dependencies": {
-    "firebase-admin": "^9.2.0",
-    "firebase-functions": "^3.11.0",
+    "@babel/polyfill": "^7.12.1",
+    "@google-cloud/dialogflow": "^3.3.0",
+    "@google-cloud/storage": "^5.8.0",
     "actions-on-google": "^2.13.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dialogflow": "^1.2.0",
     "dialogflow-fulfillment": "^0.6.1",
+    "firebase": "^8.2.10",
+    "firebase-admin": "^9.2.0",
+    "firebase-functions": "^3.13.2",
     "googleapis": "^67.0.0",
     "node-forge": "^0.10.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "@babel/node": "^7.13.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.13.8",
+    "@babel/preset-env": "^7.13.9",
     "eslint": "^7.6.0",
     "eslint-config-google": "^0.14.0",
-    "firebase-functions-test": "^0.2.0"
+    "firebase-functions-test": "^0.2.0",
+    "nodemon": "^2.0.7"
   },
   "private": true
 }
