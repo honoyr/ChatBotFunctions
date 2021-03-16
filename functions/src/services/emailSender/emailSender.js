@@ -1,4 +1,4 @@
-import emailAPISender from "../config/index";
+import emailAPISender from "../../config";
 import https from "https";
 
 // eslint-disable-next-line valid-jsdoc

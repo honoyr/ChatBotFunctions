@@ -172,7 +172,7 @@ class ChatbotComponent {
         this.sessionId = Math.random().toString(36).slice(-5);
     }
     ngOnInit() {
-        this.addBotMessage('Human presence detected 🤖. How can I help you? ');
+        this.addBotMessage('Hi. Thank you for reaching out to me. I can send you my resume or schedule an interview and more...');
     }
     handleUserMessage(event) {
         console.log(event);

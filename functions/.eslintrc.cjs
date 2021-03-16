@@ -12,6 +12,7 @@ module.exports = {
     "eslint:recommended",
     "google",
   ],
+  "parser": "babel-eslint",
   "rules": {
     "quotes": ["error", "double"],
     "max-len": [1, 170, 2, {
@@ -21,8 +22,8 @@ module.exports = {
     "no-restricted-imports": [
       "error",
       {
-        "patterns": ["@material-ui/*/*/*", "!@material-ui/core/test-utils/*"]
-      }
+        "patterns": ["@material-ui/*/*/*", "!@material-ui/core/test-utils-BETA/*"],
+      },
     ],
   },
 };
