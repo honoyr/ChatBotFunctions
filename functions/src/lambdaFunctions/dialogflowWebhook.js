@@ -8,7 +8,7 @@ import createCalendarEvent from "../services/calendarEvents/createCalendarEvent"
 
 
 const timeZone = "America/Los_Angeles";
-const timeZoneOffset = "-04:00";
+const timeZoneOffset = "-07:00";
 
 exports.dialogflowWebhook = functions.https.onRequest(async (request, response) => {
   const agent = new WebhookClient({request, response});
@@ -61,7 +61,7 @@ exports.dialogflowWebhook = functions.https.onRequest(async (request, response) 
 
     return createCalendarEvent(dateTimeStart, dateTimeEnd, appointmentType, emailAttendee, description).then(() => {
       sendEmailByPath(emailAttendee, APPOINTMENT);
-      agent.add(`Ok, let me see if we can fit you in. ${appointmentTimeString} is fine!. I sent you my resume as well.`);
+      agent.add(`Ok, let me see if we can fit you in. ${appointmentTimeString} (PST) is fine!. I sent you my resume as well.`);
     }).catch((e) => {
       console.log("\n\nERROR = " + e);
       agent.add(`I'm sorry, there are no slots available for ${appointmentTimeString}.`);
