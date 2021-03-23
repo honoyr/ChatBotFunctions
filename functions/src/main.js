@@ -14,7 +14,6 @@ import dialogflowWebhook from "./lambdaFunctions/dialogflowWebhook";
 import admin from "firebase-admin";
 import serviceAccount from "./config/serviceAccount";
 
-
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://dialogflow-d683a-default-rtdb.firebaseio.com",

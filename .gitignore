@@ -6,11 +6,19 @@
 # build functions to es15
 /functions/dist/**
 /functions/src/domain/**
+
+#beta
 /functions/src/services/emailSender-BETA
+
+#configs
+/functions/jsconfig.json
 
 *service-account.json
 
 **BETA
+
+# WEB APP
+/public/**
 
 **/.DS_Store
 
