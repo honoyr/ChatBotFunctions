@@ -23,4 +23,3 @@ exports.dialogflowGateway = functions.https.onRequest((request, response) => {
   }
 });
 
-// export default ServiceRepository;

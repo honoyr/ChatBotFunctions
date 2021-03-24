@@ -1,10 +1,9 @@
 import * as functions from "firebase-functions";
 import {WebhookClient} from "dialogflow-fulfillment";
-import admin from "firebase-admin";
 import {sendEmailByPath} from "../services";
-import {APPOINTMENT} from "../const";
+import {APPOINTMENT, RESUME} from "../const";
 
-import createCalendarEvent from "../services/calendarEvents/createCalendarEvent";
+import {createCalendarEvent} from "../services";
 
 
 const timeZone = "America/Los_Angeles";
@@ -13,27 +12,9 @@ const timeZoneOffset = "-07:00";
 exports.dialogflowWebhook = functions.https.onRequest(async (request, response) => {
   const agent = new WebhookClient({request, response});
 
-  const result = request.body.queryResult;
-
   // eslint-disable-next-line require-jsdoc
   function welcome(agent) {
     agent.add("Welcome to my agent!");
-  }
-
-  // eslint-disable-next-line require-jsdoc
-  function fallback(agent) {
-    agent.add("Sorry, can you try again?");
-  }
-
-  // eslint-disable-next-line require-jsdoc
-  async function userOnboardingHandler(agent) {
-    const db = admin.firestore();
-    const profile = db.collection("users").doc("jeffd23");
-
-    const {name, color} = result.parameters;
-
-    await profile.set({name, color});
-    agent.add("Welcome aboard my friend!");
   }
 
   const appointmentType = agent.parameters.AppointmentType;
@@ -57,7 +38,7 @@ exports.dialogflowWebhook = functions.https.onRequest(async (request, response) 
         "en-US",
         {month: "long", day: "numeric", hour: "numeric", timeZone: timeZone},
     );
-    // Check the availibility of the time, and make an appointment if there is time on the calendar
+    // Check the availability of the time, and make an appointment if there is time on the calendar
 
     return createCalendarEvent(dateTimeStart, dateTimeEnd, appointmentType, emailAttendee, description).then(() => {
       sendEmailByPath(emailAttendee, APPOINTMENT);
@@ -68,11 +49,20 @@ exports.dialogflowWebhook = functions.https.onRequest(async (request, response) 
     });
   }
 
+  // eslint-disable-next-line require-jsdoc
+  function sendResume(agent) {
+    try {
+      sendEmailByPath(emailAttendee, RESUME);
+      agent.add("Check your mailbox, please. I've sent you my resume.");
+    } catch (e) {
+      console.log("\n\nERROR = " + e);
+      agent.add("Ok. I'll send you my resume shortly.");
+    }
+  }
 
   const intentMap = new Map();
   intentMap.set("Default Welcome Intent", welcome);
-  intentMap.set("Default Fallback Intent", fallback);
-  intentMap.set("UserOnboarding", userOnboardingHandler);
   intentMap.set("Schedule Appointment", makeAppointment);
+  intentMap.set("Send Resume", sendResume);
   agent.handleRequest(intentMap);
 });
