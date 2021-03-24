@@ -8,7 +8,7 @@ The ChatBot has the following features:
 - it can send my resume to the interviewer
 
 
-gif img
+![ChatBotGif](https://user-images.githubusercontent.com/33399226/112348195-d4e0b500-8c84-11eb-93ec-21e1f3c5bec3.gif)
 
 ### Requirements
 
