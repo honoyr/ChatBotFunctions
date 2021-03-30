@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 
 const dialogflowURL = "https://us-central1-dialogflow-d683a.cloudfunctions.net/dialogflowGateway";
 
+// const dialogflowURL = "http://localhost:5001/dialogflow-d683a/us-central1/dialogflowGateway";
+
 @Component({
   selector: 'app-chatbot',
   templateUrl: './chatbot.component.html',

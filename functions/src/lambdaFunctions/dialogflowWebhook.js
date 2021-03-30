@@ -1,10 +1,7 @@
 import * as functions from "firebase-functions";
 import {WebhookClient} from "dialogflow-fulfillment";
-import {sendEmailByPath} from "../services";
+import {sendEmailByPath, createCalendarEvent, OpenAI} from "../services";
 import {APPOINTMENT, RESUME} from "../const";
-
-import {createCalendarEvent} from "../services";
-
 
 const timeZone = "America/Los_Angeles";
 const timeZoneOffset = "-07:00";
@@ -49,20 +46,58 @@ exports.dialogflowWebhook = functions.https.onRequest(async (request, response) 
     });
   }
 
-  // eslint-disable-next-line require-jsdoc
+  // eslint-disable-next-line require-jsdoc,valid-jsdoc
+  /**
+   * SendResume function send resume to email attendee.
+   * @agent {object} Webhook class for custom messaging.
+   * @RESIME global variable which stores path to file.
+   */
   function sendResume(agent) {
     try {
-      sendEmailByPath(emailAttendee, RESUME);
+      sendEmailByPath(agent.parameters.email, RESUME);
       agent.add("Check your mailbox, please. I've sent you my resume.");
     } catch (e) {
       console.log("\n\nERROR = " + e);
+      // need to store data to send it later.
       agent.add("Ok. I'll send you my resume shortly.");
     }
+  }
+
+  // eslint-disable-next-line require-jsdoc,valid-jsdoc
+  /**
+   * fallback function get generic answer from GPT-3 to unknown question in DialogFlow intent.
+   * @agent {object} Webhook class for custom messaging.
+   * @return {*f} gpt3 Call back to @agent.
+   */
+  function fallback(agent) {
+    const openai = new OpenAI();
+    let answer = null;
+
+    return (async () => {
+      const gptResponse = await openai.complete({
+        engine: "curie-instruct-beta",
+        prompt: agent.query + "'''",
+        maxTokens: 100,
+        temperature: 0.7,
+        topP: 1,
+        presencePenalty: 0,
+        frequencyPenalty: 0,
+        bestOf: 1,
+        n: 1,
+        stream: false,
+        stop: "'''",
+      });
+      const tmp = gptResponse.data.choices[0].text;
+      answer = tmp.replace(/([\t\r\n\v\f]+)/g, "");
+    })().then(()=>{
+      agent.add(answer || "Sorry, but I have a language processing limitation. Can you rephrase?");
+    });
   }
 
   const intentMap = new Map();
   intentMap.set("Default Welcome Intent", welcome);
   intentMap.set("Schedule Appointment", makeAppointment);
   intentMap.set("Send Resume", sendResume);
+  intentMap.set("Default Fallback Intent", fallback);
   agent.handleRequest(intentMap);
 });

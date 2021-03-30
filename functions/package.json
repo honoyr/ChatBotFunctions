@@ -11,7 +11,8 @@
     "dev": "nodemon — exec babel-node dist/index.js",
     "watch": "npm run-script build --watch",
     "build": "babel 'src' --out-dir 'dist' --source-maps",
-    "local": "npm run-script watch & firebase serve"
+    "local": "npm run-script watch & firebase serve",
+    "localF": "npm run-script watch & firebase serve --only functions"
   },
   "engines": {
     "node": "14"

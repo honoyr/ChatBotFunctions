@@ -1,6 +1,6 @@
 ## 1. Overview
 
-This is the source code for the Firebase Interview ChatBot.
+This is the source code for the Interview ChatBot.
 
 The ChatBot has the following features:
 - it can answer common interview screening questions about my experience as a software engineer, programming skills, and work authorization status
@@ -19,6 +19,10 @@ The ChatBot has the following features:
 - [Google Cloud Patform](https://cloud.google.com/)
 - [DialogFlow Account](https://dialogflow.cloud.google.com/)
 - [Firebase](https://console.firebase.google.com/) console
+
+### Architecture
+
+![Update Architecture diagram](https://lucid.app/publicSegments/view/bb25947e-2bad-4fe7-900b-1362567fba06/image.png)
 
 ## 2 Getting Started
 
@@ -61,7 +65,8 @@ Some of these products need special configuration or need to be enabled using th
 - Open your [Google Cloud Patform](https://cloud.google.com/)
 - Go to [API Library](https://console.cloud.google.com/apis/library)
 - Enabel [DialogFlow API](https://console.cloud.google.com/apis/library/dialogflow.googleapis.com)
-- Set up your [dialogflow service account](https://console.cloud.google.com/iam-admin/iam) permition to **Owner** role to get access to Dialogflow fulfillment from 3rd party services.
+- Set up your [dialogflow service account](https://console.cloud.google.com/iam-admin/iam) permission to **Owner** role to get access to Dialogflow fulfillment from 3rd party services.
+- Make sure your [firebase service account](https://console.cloud.google.com/iam-admin/iam) has **Owner** role as well.
 
 ### Google Calendar API
 
