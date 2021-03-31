@@ -22,7 +22,8 @@ The ChatBot has the following features:
 
 ### Architecture
 
-![Update Architecture diagram](https://lucid.app/publicSegments/view/bb25947e-2bad-4fe7-900b-1362567fba06/image.png)
+[comment]: <> (![Live Architecture diagram]&#40;https://lucid.app/publicSegments/view/bb25947e-2bad-4fe7-900b-1362567fba06/image.png&#41;)
+![image-min](https://user-images.githubusercontent.com/33399226/113071631-00c6d380-917a-11eb-9e5b-2a6347c12416.png)
 
 ## 2 Getting Started
 
