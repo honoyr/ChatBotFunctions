@@ -25,6 +25,22 @@ The ChatBot has the following features:
 [comment]: <> (![Live Architecture diagram]&#40;https://lucid.app/publicSegments/view/bb25947e-2bad-4fe7-900b-1362567fba06/image.png&#41;)
 ![image-min](https://user-images.githubusercontent.com/33399226/113071631-00c6d380-917a-11eb-9e5b-2a6347c12416.png)
 
+- [Google Cloud Patform](https://cloud.google.com/) - cloud infrastructure for development.
+- [Firebase](https://console.firebase.google.com/) - works on top of GCP. Used for hosting, data storing. Provide developer tools such as: cloud functions,analytics, monitoring and testing.
+- [Nebular](https://akveo.github.io/nebular/) Angular UI Library - Library for web application.
+- [DialogFlow Account](https://dialogflow.cloud.google.com/) - for managing every aspect of natural language processing.
+- [PostoHub](https://www.postohub.io/) - for sending emails. PostoHub is a Transactional Email API Service for developers.
+- [OpenAI](https://openai.com/) - GPT-3 API for managing answer for unknown questions. Temporarily disabled because of OpenAi Policy. 
+- Google Calendar API - integration with Google Calendar.
+
+#### Overview 
+
+**Dialogflow Gateway** Cloud Functions use to communicate with Dialogflow. Function triggered when a watched event is being fired.
+
+When Dialogflow Gateway get all necessary information from the user, Dialogflow sends a webhook to the second Cloud Function. The **Webhook** Cloud Function holds a map of all the possible intents and calls the server to fulfill them.
+
+**Compute Egine** triggered on specific intent and executing scripts.
+
 ## 2 Getting Started
 
 Clone the [GitHub repository](https://github.com/honoyr/ChatBotFunctions)  from the command line:

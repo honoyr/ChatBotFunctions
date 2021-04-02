@@ -1,4 +1,5 @@
 import emailAPISender from "../../config";
+import {NAME, EMAIL_TO, SUBJECT, PREVIEW_MSG} from "../../const";
 import https from "https";
 
 // eslint-disable-next-line valid-jsdoc
@@ -22,11 +23,11 @@ export default function sendEmail(emailAttendee, htmlTemplate) {
       "email": emailAttendee,
     },
     "reply_to": {
-      "name": "Dennis Gonor",
-      "email": "dennis.gonor@gmail.com",
+      "name": NAME,
+      "email": EMAIL_TO,
     },
-    "subject": "Dennis Gonor SE Resume",
-    "preview_message": "Resume",
+    "subject": SUBJECT,
+    "preview_message": PREVIEW_MSG,
     "mail_settings": {
       "expand_preview": true,
       "add_unsubscribe": true,

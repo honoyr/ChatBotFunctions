@@ -1,22 +1,18 @@
 import * as functions from "firebase-functions";
 import {WebhookClient} from "dialogflow-fulfillment";
 import {sendEmailByPath, createCalendarEvent, OpenAI} from "../services";
-import {APPOINTMENT, RESUME} from "../const";
-
-const timeZone = "America/Los_Angeles";
-const timeZoneOffset = "-07:00";
+import {APPOINTMENT, RESUME, TIME_ZONE, TIME_ZONE_OFFSET} from "../const";
 
 exports.dialogflowWebhook = functions.https.onRequest(async (request, response) => {
   const agent = new WebhookClient({request, response});
+  const appointmentType = agent.parameters.AppointmentType;
+  const emailAttendee = agent.parameters.email;
+  const description = agent.parameters.description;
 
   // eslint-disable-next-line require-jsdoc
   function welcome(agent) {
     agent.add("Welcome to my agent!");
   }
-
-  const appointmentType = agent.parameters.AppointmentType;
-  const emailAttendee = agent.parameters.email;
-  const description = agent.parameters.description;
 
   // eslint-disable-next-line valid-jsdoc
   /**
@@ -29,11 +25,11 @@ exports.dialogflowWebhook = functions.https.onRequest(async (request, response) 
      */
   function makeAppointment(agent) {
     // Calculate appointment start and end datetimes (end = +1hr from start)
-    const dateTimeStart = new Date(Date.parse(agent.parameters.date.split("T")[0] + "T" + agent.parameters.time.split("T")[1].split("-")[0] + timeZoneOffset));
+    const dateTimeStart = new Date(Date.parse(agent.parameters.date.split("T")[0]+ "T" + agent.parameters.time.split("T")[1].split("-")[0] + TIME_ZONE_OFFSET));
     const dateTimeEnd = new Date(new Date(dateTimeStart).setHours(dateTimeStart.getHours() + 1));
     const appointmentTimeString = dateTimeStart.toLocaleString(
         "en-US",
-        {month: "long", day: "numeric", hour: "numeric", timeZone: timeZone},
+        {month: "long", day: "numeric", hour: "numeric", timeZone: TIME_ZONE},
     );
     // Check the availability of the time, and make an appointment if there is time on the calendar
 
@@ -65,7 +61,7 @@ exports.dialogflowWebhook = functions.https.onRequest(async (request, response) 
 
   // eslint-disable-next-line require-jsdoc,valid-jsdoc
   /**
-   * fallback function get generic answer from GPT-3 to unknown question in DialogFlow intent.
+   * fallback function get generic answer from GPT-3 to unknown question.
    * @agent {object} Webhook class for custom messaging.
    * @return {*f} gpt3 Call back to @agent.
    */

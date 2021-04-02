@@ -6,21 +6,22 @@ import axios from "axios";
 
 // eslint-disable-next-line require-jsdoc
 export default class OpenAI {
+  // eslint-disable-next-line require-jsdoc
   constructor() {
     this._api_key = GPT3APIkey;
   }
 
-  // eslint-disable-next-line camelcase
+  // eslint-disable-next-line camelcase,require-jsdoc
   _safe_cast(number) {
     return isNaN(Number(number)) ? null : Number(number);
   }
 
-  // eslint-disable-next-line camelcase
+  // eslint-disable-next-line camelcase,require-jsdoc
   _construct_parameter(name, value) {
     return (typeof value === "undefined" || value === null) ? null : {[name]: value};
   }
 
-  // eslint-disable-next-line camelcase
+  // eslint-disable-next-line camelcase,require-jsdoc
   _send_request(opts) {
     const url = config.completionURL(opts.engine);
     const reqOpts = {
@@ -46,10 +47,12 @@ export default class OpenAI {
     return axios.post(url, data, reqOpts);
   }
 
+  // eslint-disable-next-line require-jsdoc
   complete(opts) {
     return this._send_request(opts);
   }
 
+  // eslint-disable-next-line require-jsdoc
   search(opts) {
     const url = config.searchURL(opts.engine);
     const reqOpts = {
