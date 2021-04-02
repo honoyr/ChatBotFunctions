@@ -23,7 +23,7 @@ The ChatBot has the following features:
 ### Architecture
 
 [comment]: <> (![Live Architecture diagram]&#40;https://lucid.app/publicSegments/view/bb25947e-2bad-4fe7-900b-1362567fba06/image.png&#41;)
-![image-min](https://user-images.githubusercontent.com/33399226/113071631-00c6d380-917a-11eb-9e5b-2a6347c12416.png)
+![image-min](https://user-images.githubusercontent.com/33399226/113369210-bdfa2c80-932e-11eb-9b93-03d58a4813cd.png)
 
 - [Google Cloud Patform](https://cloud.google.com/) - cloud infrastructure for development.
 - [Firebase](https://console.firebase.google.com/) - works on top of GCP. Used for hosting, data storing. Firebase provides developer tools such as cloud functions, analytics, monitoring, and testing.
