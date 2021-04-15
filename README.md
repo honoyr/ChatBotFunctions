@@ -73,7 +73,7 @@ Some of these products need special configuration or need to be enabled using th
 2.  Register the app with the nickname  **ChatBot**, then check the box next to  **Also set up Firebase Hosting for this app**. Click  **Register app**.
 3.  Click through the remaining steps. You don't need to follow the instructions now; these will be covered in later steps of this doc.
 
-![ea9ab0db531a104c.png](https://firebase.google.com/codelabs/firebase-web/img/ea9ab0db531a104c.png)
+![ea9ab0db531a104c](https://user-images.githubusercontent.com/33399226/114799208-15ec5680-9d65-11eb-8d3e-4b9973509b2c.jpg)
 
 ## 4 Set up Google Cloud Platform API credentials
 
